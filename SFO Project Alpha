@@ -1,0 +1,40 @@
+// Set up the game canvas
+const canvas = document.createElement('canvas');
+canvas.width = 320;
+canvas.height = 240;
+document.body.appendChild(canvas);
+const ctx = canvas.getContext('2d');
+
+// Set initial player position
+let playerX = 150;
+let playerY = 100;
+
+// Game loop
+function gameLoop() {
+  // Clear canvas
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+  // Draw player
+  ctx.fillRect(playerX, playerY, 20, 20);
+  
+  // Update player position based on user input
+  if (keys.ArrowUp) playerY -= 1;
+  if (keys.ArrowDown) playerY += 1;
+  if (keys.ArrowLeft) playerX -= 1;
+  if (keys.ArrowRight) playerX += 1;
+  
+  // Request next frame
+  requestAnimationFrame(gameLoop);
+}
+
+// Handle keyboard input
+const keys = {};
+document.addEventListener('keydown', (event) => {
+  keys[event.key] = true;
+});
+document.addEventListener('keyup', (event) => {
+  keys[event.key] = false;
+});
+
+// Start the game loop
+gameLoop();
